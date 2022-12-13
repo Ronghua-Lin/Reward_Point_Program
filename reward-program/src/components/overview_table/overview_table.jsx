@@ -6,9 +6,9 @@ import fetchData from "../../services/fetchData.js";
 import Overview_table_row from "../overview_table_row/overview_table_row.jsx";
 import "./overview_table.css";
 import calculatePoints from "../../util/calculatePoints.js";
-export default function OverviewTable() {
+import { withLoading } from "../../hoc/withLoading";
+function OverviewTable({updateLoading}) {
     const [transactions, setTransactions] = useState([]);
-    const [loading, setloading] = useState(true);
     const [sorted, setSorted] = useState({
         date: "",
         amount: "",
@@ -16,13 +16,15 @@ export default function OverviewTable() {
     });
     useEffect(() => {
         async function getData() {
+            updateLoading(true)
             const record = await fetchData();
+            updateLoading(false)
             setTransactions(record);
-            setloading(false);
         }
         getData();
     }, []);
     const navigate = useNavigate();
+
     function onClickHandler(type) {
         let sortedTransactions;
         switch (type) {
@@ -80,9 +82,6 @@ export default function OverviewTable() {
 
     return (
         <div className="Overview_table_container">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : (
                 <div>
                     <Table striped bordered hover>
                         <thead>
@@ -131,7 +130,8 @@ export default function OverviewTable() {
                         </tbody>
                     </Table>
                 </div>
-            )}
+       
         </div>
     );
 }
+export default withLoading(OverviewTable)

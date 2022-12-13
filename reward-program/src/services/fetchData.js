@@ -12,5 +12,10 @@ export default async function fetchData() {
             // handle error
             console.log(error);
         });
-    return data;
+    const res = new Promise((res,rej) => {
+        setTimeout(() => {
+            res(data)
+        },1000)
+    })
+    return res;
 }

@@ -4,17 +4,18 @@ import { Button, Table, Form, InputGroup } from "react-bootstrap";
 import Detail_table_row from "../detail_table_row/detail_table_row.jsx";
 import fetchData from "../../services/fetchData.js";
 import groupUserTransactions from "../../util/groupUserTransactions.js";
+import { withLoading } from "../../hoc/withLoading.js";
 
-export default function DetailTable() {
+function DetailTable({updateLoading}) {
     const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
-    const [loading, setloading] = useState(true);
     const [searchContent, setSearchContent] = useState("");
     async function getData() {
+        updateLoading(true)
         const record = await fetchData();
+        updateLoading(false)
         const filteredTransaction = groupUserTransactions(record);
         setTransactions(filteredTransaction);
-        setloading(false);
     }
     useEffect(() => {
         getData();
@@ -36,9 +37,7 @@ export default function DetailTable() {
     }
     return (
         <div className="Detail_table_container">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : (
+
                 <div>
                     <InputGroup className="mb-3">
                         <div
@@ -95,7 +94,9 @@ export default function DetailTable() {
                         </tbody>
                     </Table>
                 </div>
-            )}
+            
         </div>
     );
 }
+
+export default withLoading(DetailTable)
