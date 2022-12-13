@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Table, Form, InputGroup } from "react-bootstrap";
 import Detail_table_row from "../detail_table_row/detail_table_row.jsx";
 import fetchData from "../../services/fetchData.js";
@@ -7,7 +6,6 @@ import groupUserTransactions from "../../util/groupUserTransactions.js";
 import { withLoading } from "../../hoc/withLoading.js";
 
 function DetailTable({updateLoading}) {
-    const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [searchContent, setSearchContent] = useState("");
     async function getData() {

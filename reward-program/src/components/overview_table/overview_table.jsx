@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Table } from "react-bootstrap";
 import "../detail_table/detail_table.css";
 import fetchData from "../../services/fetchData.js";
@@ -23,7 +22,6 @@ function OverviewTable({updateLoading}) {
         }
         getData();
     }, []);
-    const navigate = useNavigate();
 
     function onClickHandler(type) {
         let sortedTransactions;
