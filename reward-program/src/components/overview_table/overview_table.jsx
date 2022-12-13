@@ -6,7 +6,7 @@ import fetchData from "../../services/fetchData.js";
 import Overview_table_row from "../overview_table_row/overview_table_row.jsx";
 import "./overview_table.css";
 import calculatePoints from "../../util/calculatePoints.js";
-export default function Overview_table() {
+export default function OverviewTable() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setloading] = useState(true);
     const [sorted, setSorted] = useState({
@@ -84,15 +84,6 @@ export default function Overview_table() {
                 <h1>Loading...</h1>
             ) : (
                 <div>
-                    <Button
-                        variant="primary"
-                        onClick={(e) => navigate("/Detail_table")}
-                        className="mb-3"
-                    >
-                        Go
-                    </Button>
-                    {"switch to the detail table page"}
-                    <h2>Transactions Overview_table</h2>
                     <Table striped bordered hover>
                         <thead>
                             <tr className="text-center">

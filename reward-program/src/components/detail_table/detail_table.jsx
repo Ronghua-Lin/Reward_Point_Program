@@ -5,7 +5,7 @@ import Detail_table_row from "../detail_table_row/detail_table_row.jsx";
 import fetchData from "../../services/fetchData.js";
 import groupUserTransactions from "../../util/groupUserTransactions.js";
 
-export default function Detail_table() {
+export default function DetailTable() {
     const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [loading, setloading] = useState(true);
@@ -41,13 +41,6 @@ export default function Detail_table() {
             ) : (
                 <div>
                     <InputGroup className="mb-3">
-                        <Button
-                            variant="primary"
-                            onClick={(e) => navigate("/Overview_table")}
-                        >
-                            Go
-                        </Button>
-                        {"switch to the overview table page"}
                         <div
                             style={{
                                 display: "flex",
@@ -74,7 +67,6 @@ export default function Detail_table() {
                             
                         </div>
                     </InputGroup>
-                    <h2>Detail_table</h2>
                     <Table striped bordered hover>
                         <thead>
                             <tr className="text-center">
