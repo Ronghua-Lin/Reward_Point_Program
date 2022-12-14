@@ -1,9 +1,0 @@
-// import { render, screen } from "@testing-library/react";
-// import APP from "../../App.js";
-
-// test("render app", async () => {
-//     render(<APP />);
-//     // expect(screen.getByRole("h2")).toBe("Rewards Table");
-//     const linkElement=screen.getByText(/Rewards Table/i);
-//     expect(linkElement).toBeInTheDocument();
-// });
