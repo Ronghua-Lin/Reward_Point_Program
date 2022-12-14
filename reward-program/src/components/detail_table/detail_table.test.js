@@ -1,32 +1,60 @@
 import React from "react";
-import { render, screen } from '@testing-library/react';
-import { act } from "react-dom/test-utils";
+import {
+    render,
+    screen,
+    waitForElementToBeRemoved,
+    prettyDOM,
+} from "@testing-library/react";
 import mockFetch from "../../mocks/mockFetch";
 import DetailTable from "./detail_table";
+import userEvent from "@testing-library/user-event";
 
+
+
+
+let windowFetchSpy;
 beforeEach(() => {
-    jest.spyOn(window,"fetch").mockImplementation(mockFetch)
+    windowFetchSpy =jest.spyOn(window, "fetch").mockImplementation(mockFetch);
+    // jest.mock(mockFetch)
 });
 
 afterEach(() => {
-    jest.restoreAllMocks()
+    jest.restoreAllMocks();
 });
 
-  
-test('renders the landing page', async () => {
+test("renders the landing page", async () => {
     render(<DetailTable />);
-    expect(await screen.findByRole("thead")).toBeInTheDocument();
+
+    //check some table headers
+    expect(screen.getByText("Name")).toBeInTheDocument();
+    expect(screen.getByText("Month")).toBeInTheDocument();
+    expect(screen.getByText("date")).toBeInTheDocument();
+
+    //check number of columns for the table
+    const columns = screen.getAllByRole("columnheader");
+    expect(columns).toHaveLength(7);
+
+    //check data load from JSON server
+    expect(windowFetchSpy).toHaveBeenCalledWith("http://localhost:3000/transactions");
+    expect(windowFetchSpy).toHaveBeenCalledTimes(1);
+
 
 });
- 
-// it("renders rewards data", async () => {
-//     // Use the asynchronous version of act to apply resolved promises
-//     await act(async () => {
-//         render(<DetailTable/>, container);
-//     });
 
-// //   expect(container.textContent).toContain('Tess');
+test("check search button features", async () => {
+    const {container}=render(<DetailTable />);
 
-//   // remove the mock to ensure tests are completely isolated
-//   global.fetch.mockRestore();
-// });
+
+    //test search button
+    const searchBtn = screen.getByRole("button", { name: "Search" });
+    expect(searchBtn).toBeInTheDocument();
+
+    //test input onChange
+    const input = screen.getByPlaceholderText("Customer's name");
+    userEvent.type(input, "Norris");
+    expect(input.value).toBe("Norris");
+
+    //check search function
+    userEvent.click(searchBtn);
+
+});

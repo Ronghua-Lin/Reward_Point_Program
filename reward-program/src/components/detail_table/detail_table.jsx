@@ -20,7 +20,7 @@ function DetailTable({updateLoading}) {
     }, []);
     function onClickHandler(e){
         e.preventDefault();
-        // const newTransactions= Object.entries(transactions).filter(t=t)
+        
         if(transactions[searchContent]!==undefined){
             const newTransactions={[searchContent]:transactions[searchContent]};
             setTransactions(newTransactions);
@@ -58,7 +58,7 @@ function DetailTable({updateLoading}) {
                                 id="button-addon2"
                                 onClick={e=>onClickHandler(e)}
                             >
-                                <span class="bi-search" style={{paddingRight:"6px"}}></span> 
+                                <span className="bi-search" style={{paddingRight:"6px"}}></span> 
                                 Search
                             </Button>
                             

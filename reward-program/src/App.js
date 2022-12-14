@@ -20,7 +20,7 @@ function App() {
                 </div>
 
             </div>    
-            <div className="content-container">
+            <div className="content-container" data-testid="table-container">
                 {
                     groupByUser ? <DetailTable/> : <OverviewTable />
                 }

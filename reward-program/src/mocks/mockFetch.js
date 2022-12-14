@@ -1,4 +1,5 @@
-const data = [
+import { BASE_URL } from "../config/constants.js";
+export const data = [
     {
         "id": 1,
         "user": {
@@ -362,16 +363,39 @@ const data = [
 ]
 
 export default async function mockFetch(url) {
-    switch (url) {
-        case "http://localhost:3000/transactions": {
-            return {
-                ok: true,
-                status: 200,
-                json: async () => data,
-            };
-        }
-        default: {
-            throw new Error(`Unhandled request: ${url}`);
-        }
-    }
+    // switch (url) {
+    //     case "http://localhost:3000/transactions": {
+    //         return {
+    //             ok: true,
+    //             status: 200,
+    //             json: async () => data,
+    //         };
+    //     }
+    //     default: {
+    //         throw new Error(`Unhandled request: ${url}`);
+    //     }
+    // }
+
+    return Promise.resolve({
+        json: () => Promise.resolve(data),
+    });
 }
+
+
+
+
+// export default async function mockFetch() {
+    
+
+//     // get:jest.fn().mockResolvedValue(JSON.stringify(data))
+
+//     try{
+//         const result = await fetch(
+//             `${BASE_URL}/transactions`
+//           );
+//           const data = await result.json();
+//           return data;
+//         } catch (e) {
+//           return null;
+//     }
+// }

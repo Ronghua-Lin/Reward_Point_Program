@@ -88,30 +88,30 @@ function OverviewTable({updateLoading}) {
                                 <th onClick={(e) => onClickHandler("date")}>
                                     Date
                                     {sorted.date === "ascendant" ? (
-                                        <i class="bi bi-caret-up-fill"></i>
+                                        <i className="bi bi-caret-up-fill"></i>
                                     ) : (
                                         sorted.date === "descendant" && (
-                                            <i class="bi bi-caret-down-fill"></i>
+                                            <i className="bi bi-caret-down-fill"></i>
                                         )
                                     )}
                                 </th>
                                 <th onClick={(e) => onClickHandler("amount")}>
                                     Amount
                                     {sorted.amount === "ascendant" ? (
-                                        <i class="bi bi-caret-up-fill"></i>
+                                        <i className="bi bi-caret-up-fill"></i>
                                     ) : (
                                         sorted.amount === "descendant" && (
-                                            <i class="bi bi-caret-down-fill"></i>
+                                            <i className="bi bi-caret-down-fill"></i>
                                         )
                                     )}
                                 </th>
                                 <th onClick={(e) => onClickHandler("points")}>
                                     Reward Points
                                     {sorted.points === "ascendant" ? (
-                                        <i class="bi bi-caret-up-fill"></i>
+                                        <i className="bi bi-caret-up-fill"></i>
                                     ) : (
                                         sorted.points === "descendant" && (
-                                            <i class="bi bi-caret-down-fill"></i>
+                                            <i className="bi bi-caret-down-fill"></i>
                                         )
                                     )}
                                 </th>
@@ -128,7 +128,6 @@ function OverviewTable({updateLoading}) {
                         </tbody>
                     </Table>
                 </div>
-       
         </div>
     );
 }
