@@ -1,8 +1,7 @@
 import "./App.css";
 import DetailTable from "./components/detail_table/detail_table.jsx";
 import OverviewTable from "./components/overview_table/overview_table.jsx";
-import Page404 from "./components/page404/page404.jsx";
-import { Route, Routes, Link, Navigate, Form } from "react-router-dom";
+
 import { useState } from "react";
 
 function App() {
