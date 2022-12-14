@@ -5,12 +5,14 @@ import {
     waitForElementToBeRemoved,
     prettyDOM,
 } from "@testing-library/react";
-import mockFetch from "../../mocks/mockFetch";
+import mockFetch, { data } from "../../mocks/mockFetch";
 import DetailTable from "./detail_table";
 import userEvent from "@testing-library/user-event";
+import groupUserTransactions from "../../util/groupUserTransactions";
 
-
-
+function sorting(data, name){
+    return {[name]:groupUserTransactions(data)[name]}
+};
 
 let windowFetchSpy;
 beforeEach(() => {
@@ -23,7 +25,7 @@ afterEach(() => {
 });
 
 test("renders the landing page", async () => {
-    render(<DetailTable />);
+    const {container}=render(<DetailTable />);
 
     //check some table headers
     expect(screen.getByText("Name")).toBeInTheDocument();
@@ -56,5 +58,11 @@ test("check search button features", async () => {
 
     //check search function
     userEvent.click(searchBtn);
+
+    const filtered_data = sorting(data, "Norris");
+
+    console.log('condada',filtered_data )
+    expect(Object.keys(filtered_data).includes("Norris")).toBe(true);
+    expect(Object.keys(filtered_data).includes("Tess")).toBe(false);
 
 });
